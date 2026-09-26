@@ -1,6 +1,9 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using ECommerceApp.Data;
 
-app.MapGet("/", () => "Hello World!");
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>();
+
+var app = builder.Build();
 
 app.Run();
