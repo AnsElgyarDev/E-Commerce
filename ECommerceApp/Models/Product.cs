@@ -11,6 +11,7 @@ public class Product
     [Range(5, 1000000)]
     public decimal Price{ get; set; }
     public decimal Stock{ get; set; }
+    public List<CartItem> cartItems = new List<CartItem>();
 }
 
 // Product: Id, Name, CategoryId, Price, Stock
