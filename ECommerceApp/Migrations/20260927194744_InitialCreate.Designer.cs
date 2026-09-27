@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260927192957_AddingRelations")]
-    partial class AddingRelations
+    [Migration("20260927194744_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -275,13 +275,13 @@ namespace ECommerceApp.Migrations
                     b.HasOne("ECommerceApp.Models.Cart", "cart")
                         .WithMany("cartItems")
                         .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ECommerceApp.Models.Product", "product")
                         .WithMany("cartItems")
                         .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("cart");
@@ -294,7 +294,7 @@ namespace ECommerceApp.Migrations
                     b.HasOne("ECommerceApp.Models.User", "user")
                         .WithMany("orders")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("user");
@@ -305,13 +305,13 @@ namespace ECommerceApp.Migrations
                     b.HasOne("ECommerceApp.Models.Order", "order")
                         .WithMany("orderItems")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ECommerceApp.Models.Product", "product")
                         .WithMany("orderItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("order");
@@ -324,7 +324,7 @@ namespace ECommerceApp.Migrations
                     b.HasOne("ECommerceApp.Models.Order", "order")
                         .WithOne("paymentInfo")
                         .HasForeignKey("ECommerceApp.Models.PaymentInfo", "OrderId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("order");
@@ -335,7 +335,7 @@ namespace ECommerceApp.Migrations
                     b.HasOne("ECommerceApp.Models.Category", "category")
                         .WithMany("products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("category");

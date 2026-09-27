@@ -27,11 +27,11 @@ public class OrderItemConfig : IEntityTypeConfiguration<OrderItem>
         builder.HasOne(orderItem => orderItem.order)
                 .WithMany(order => order.orderItems)
                 .HasForeignKey(orderItem => orderItem.OrderId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasOne(orderItem => orderItem.product)
                 .WithMany(product => product.orderItems)
                 .HasForeignKey(orderItem => orderItem.ProductId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
     }
 }

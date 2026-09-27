@@ -26,11 +26,11 @@ public class CartItemConfig : IEntityTypeConfiguration<CartItem>
         builder.HasOne(cartItem => cartItem.cart)
                 .WithMany(cart => cart.cartItems)
                 .HasForeignKey(carItem => carItem.CartId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasOne(cartItem => cartItem.product)
                 .WithMany(cart => cart.cartItems)
                 .HasForeignKey(carItem => carItem.CartId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
     }
 }

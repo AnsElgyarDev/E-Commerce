@@ -28,6 +28,6 @@ public class PaymentInfoConfig : IEntityTypeConfiguration<PaymentInfo>
 
         builder.HasOne(paymentInfo => paymentInfo.order)
                 .WithOne(order => order.paymentInfo)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
     }
 }

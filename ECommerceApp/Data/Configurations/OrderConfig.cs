@@ -31,6 +31,6 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
         builder.HasOne(order => order.user)
                 .WithMany(user => user.orders)
                 .HasForeignKey(order => order.UserId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
     }
 }
