@@ -7,7 +7,7 @@ public class PaymentInfo
     public int Id { get; set; }
     public int OrderId { get; set; }
     public string PaymentMethod { get; set; } = string.Empty;
-    public Guid TransactionId { get; set; }
+    public  int TransactionId { get; set; }
     public string  Status { get; set; } = string.Empty; 
 }
 
