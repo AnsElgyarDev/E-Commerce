@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using ECommerceApp.Models;
 
 namespace ECommerceApp.Data;
 
@@ -8,11 +9,15 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
+
     public DbSet<User> Users { get; set; }
-    // public DbSet<Problem> Problems { get; set; }
-    // public DbSet<Contest> Contests { get; set; }
-    // public DbSet<Submission> Submissions { get; set; }
-    // public DbSet<TestCase> TestCase { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Cart> carts { get; set; }
+    public DbSet<Category> categories { get; set; }
+    public DbSet<CartItem> cartItems { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<PaymentInfo> paymentInfos { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
