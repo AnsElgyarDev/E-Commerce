@@ -8,6 +8,7 @@ public class Order
     public User user { get; set; } = new User();
     public string Status { get; set; } = string.Empty;
     public decimal TotalPrice { get; set; }
+    public List<OrderItem> orderItems = new List<OrderItem>();
 }
 
 // Order: Id, UserId, CreatedAt, Status, TotalPrice

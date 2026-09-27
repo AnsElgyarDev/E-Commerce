@@ -12,6 +12,7 @@ public class Product
     public decimal Price{ get; set; }
     public decimal Stock{ get; set; }
     public List<CartItem> cartItems = new List<CartItem>();
+    public List<OrderItem> orderItems = new List<OrderItem>();
 }
 
 // Product: Id, Name, CategoryId, Price, Stock
