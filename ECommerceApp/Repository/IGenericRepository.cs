@@ -4,9 +4,10 @@ namespace ECommerceApp.Repository;
 
 public interface IGenericRepository<T> where T : class
 {
-    public Task<List<T?>> GetAll();
+    public Task<List<T>> GetAll();
     public Task<T?> GetById(int id);
-    public Task<T?> AddAsync();
-    public void Delete();
-    public void Update();
+    public Task AddAsync(T entity);
+    public void Delete(T entity);
+    public void Update(T entity);
+    public Task saveChanges();
 }
