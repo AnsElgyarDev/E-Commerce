@@ -4,10 +4,9 @@ namespace ECommerceApp.Dto;
 
 public class UserResponseDto
 {
+    public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
-    [RegularExpression(@"[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$")]
     public string Email { get; set; } = string.Empty;
-    public string PasswordHash { get; set; } = string.Empty;
-    public Cart cart = new Cart();
-    public List<Order> orders = new List<Order>();
+    public CartDto? Cart { get; set; }
+    public List<OrderDto> Orders { get; set; } = new();
 }
