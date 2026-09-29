@@ -9,6 +9,6 @@ public class User
     [RegularExpression(@"")]
     public string Email { get; set; } = string.Empty;
     public string PasswordHash { get; set; } = string.Empty;
-    public Cart cart = new Cart();
+    public Cart cart { get; set; }
     public List<Order> orders = new List<Order>();
 }
