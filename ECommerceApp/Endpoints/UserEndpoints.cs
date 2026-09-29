@@ -10,7 +10,7 @@ namespace ECommerceApp.Endpoint;
 public static class UserEndpoints
 {
 
-    public static void MapUserEndpoint(this WebApplication app)
+    public static void MapUserEndpoints(this WebApplication app)
     {
         app.MapGet("/Users", async Task<Results<NotFound, Ok<List<UserResponseDto>>>> 
         (IGenericRepository<User> userRepo) =>

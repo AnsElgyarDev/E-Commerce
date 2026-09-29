@@ -28,5 +28,12 @@ app.MapGet("/", () =>
     return TypedResults.Redirect("/Scalar/V1");
 }).ExcludeFromDescription();
 
-app.MapUserEndpoint();
+app.MapUserEndpoints();
+app.MapProductEndpoints();
+app.MapCategoryEndpoints();
+app.MapCartEndpoints();
+app.MapCartItemEndpoints();
+app.MapOrderEndpoints();
+app.MapOrderItemEndpoints();
+app.MapPaymentInfoEndpoints();
 app.Run();
