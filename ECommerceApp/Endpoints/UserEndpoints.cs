@@ -30,7 +30,7 @@ public static class UserEndpoints
             }).ToList());
         });
 
-        app.MapGet("/Users/Id", async Task<Results<NotFound, Ok<UserResponseDto>>> 
+        app.MapGet("/Users/{Id:int}", async Task<Results<NotFound, Ok<UserResponseDto>>> 
         (IGenericRepository<User> userRepo, int Id) =>
         {
             var user = await userRepo.GetById(Id);
@@ -48,7 +48,7 @@ public static class UserEndpoints
             });
         });
 
-        app.MapPost("Users/", async 
+        app.MapPost("Users", async 
         (IGenericRepository<User> userRepo, CreateUserDto createUserDto) =>
         {
             await userRepo.AddAsync(new User
@@ -62,23 +62,30 @@ public static class UserEndpoints
             return TypedResults.Created();
         });
 
-        app.MapPut("Users", async (IGenericRepository<User> userRepo, UpdateUserDto updateUserDto) =>
+        app.MapPut("/Users/{id:int}", async Task<Results<NotFound, NoContent>> 
+        (IGenericRepository<User> userRepo, int id, UpdateUserDto updateUserDto) =>
         {
-            userRepo.Update(new User
+            var user = await userRepo.GetById(id);
+            if (user is null)
             {
-                Id = updateUserDto.Id,
-                Name = updateUserDto.Name,
-                Email = updateUserDto.Email,
-                PasswordHash = updateUserDto.PasswordHash
-            });
-    
+                return TypedResults.NotFound();
+            }
+
+            user.Name = updateUserDto.Name;
+            user.Email = updateUserDto.Email;
+            user.PasswordHash = updateUserDto.PasswordHash;
+
+            userRepo.Update(user);
+            await userRepo.saveChanges();
+
             return TypedResults.NoContent();
         });
 
         app.MapDelete("Users", async 
-                   (IGenericRepository<User> userRepo,[FromBody] User user) =>
+                   (IGenericRepository<User> userRepo,int userId) =>
         {
-            userRepo.Delete(user);
+            await userRepo.Delete(userId);
+            await userRepo.saveChanges();
             return TypedResults.NoContent();
         } );
         
