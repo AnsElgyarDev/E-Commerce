@@ -66,7 +66,7 @@ public static class CategoryEndpoints
             category.Name = dto.Name;
             category.Description = dto.Description;
 
-            repo.Update(category);
+            await repo.Update(category);
             await repo.saveChanges();
 
             return TypedResults.NoContent();

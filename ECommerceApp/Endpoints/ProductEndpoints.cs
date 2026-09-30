@@ -74,7 +74,7 @@ public static class ProductEndpoints
             product.Price = dto.Price;
             product.Stock = dto.Stock;
 
-            repo.Update(product);
+            await repo.Update(product);
             await repo.saveChanges();
 
             return TypedResults.NoContent();

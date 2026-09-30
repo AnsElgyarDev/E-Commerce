@@ -73,7 +73,7 @@ public static class PaymentInfoEndpoints
             payment.TransactionId = dto.TransactionId;
             payment.Status = dto.Status;
 
-            repo.Update(payment);
+            await repo.Update(payment);
             await repo.saveChanges();
 
             return TypedResults.NoContent();

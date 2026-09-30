@@ -72,7 +72,7 @@ public static class OrderEndpoints
             order.Status = dto.Status;
             order.TotalPrice = dto.TotalPrice;
 
-            repo.Update(order);
+            await repo.Update(order);
             await repo.saveChanges();
 
             return TypedResults.NoContent();
