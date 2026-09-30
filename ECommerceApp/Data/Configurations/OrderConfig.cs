@@ -28,9 +28,9 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
                 .HasPrecision(18, 2)
                 .IsRequired();
 
-        builder.HasOne(order => order.user)
-                .WithMany(user => user.orders)
-                .HasForeignKey(order => order.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+        // builder.HasOne(order => order.user)
+        //         .WithMany(user => user.orders)
+        //         .HasForeignKey(order => order.UserId)
+        //         .OnDelete(DeleteBehavior.NoAction);
     }
 }

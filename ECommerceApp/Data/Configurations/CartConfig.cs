@@ -18,8 +18,8 @@ public class CartConfig : IEntityTypeConfiguration<Cart>
         builder.Property(cart => cart.Id)
                 .UseIdentityColumn(seed: 1, increment: 1);
 
-        builder.HasOne(cart => cart.User)
-                .WithOne(user => user.cart)
-                .OnDelete(DeleteBehavior.Cascade);
+        // builder.HasOne(cart => cart.User)
+        //         .WithOne(user => user.cart)
+        //         .OnDelete(DeleteBehavior.Cascade);
     }
 }
