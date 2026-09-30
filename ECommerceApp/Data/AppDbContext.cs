@@ -4,11 +4,13 @@ using ECommerceApp.Models;
 
 namespace ECommerceApp.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<AppliactionUser>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
+
+    public DbSet<AppliactionUser> users { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Cart> carts { get; set; }
     public DbSet<Category> categories { get; set; }
