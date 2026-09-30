@@ -216,6 +216,9 @@ namespace ECommerceApp.Migrations
                     b.Property<decimal>("Stock")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -258,13 +261,13 @@ namespace ECommerceApp.Migrations
 
             modelBuilder.Entity("ECommerceApp.Models.Cart", b =>
                 {
-                    b.HasOne("ECommerceApp.Models.User", "user")
+                    b.HasOne("ECommerceApp.Models.User", "User")
                         .WithOne("cart")
                         .HasForeignKey("ECommerceApp.Models.Cart", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ECommerceApp.Models.CartItem", b =>
@@ -364,7 +367,8 @@ namespace ECommerceApp.Migrations
 
             modelBuilder.Entity("ECommerceApp.Models.User", b =>
                 {
-                    b.Navigation("cart");
+                    b.Navigation("cart")
+                        .IsRequired();
 
                     b.Navigation("orders");
                 });

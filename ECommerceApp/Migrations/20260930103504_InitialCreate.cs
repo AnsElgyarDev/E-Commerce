@@ -49,7 +49,8 @@ namespace ECommerceApp.Migrations
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    Stock = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Stock = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

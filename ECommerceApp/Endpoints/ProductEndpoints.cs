@@ -85,9 +85,9 @@ public static class ProductEndpoints
         (IGenericRepository<Product> repo, int id) =>
         {
             var product = await repo.GetById(id);
-            if (product is null) return TypedResults.NotFound();
+            if (product is null || product.isDeleted) return TypedResults.NotFound();
 
-            await repo.Delete(id);
+            product.isDeleted = true;
             await repo.saveChanges();
 
             return TypedResults.NoContent();

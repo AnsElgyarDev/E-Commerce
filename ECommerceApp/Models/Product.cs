@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Eventing.Reader;
 
 namespace ECommerceApp.Models;
 
@@ -13,6 +14,7 @@ public class Product
     public decimal Stock{ get; set; }
     public List<CartItem> cartItems = new List<CartItem>();
     public List<OrderItem> orderItems = new List<OrderItem>();
+    public bool isDeleted { get; set; } = false;
 }
 
-// Product: Id, Name, CategoryId, Price, Stock
+// Product: Id, Name, CategoryId, Price, Stock, isDeleted
