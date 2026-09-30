@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ECommerceApp.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ECommerceApp.Data;
 
-public class AppDbContext : IdentityDbContext<AppliactionUser>
+public class AppDbContext : IdentityDbContext<AppliactionUser, IdentityRole<int>, int>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
