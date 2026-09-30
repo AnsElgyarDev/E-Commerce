@@ -1,6 +1,7 @@
 using ECommerceApp.Dto;
 using ECommerceApp.Models;
 using ECommerceApp.Repository;
+using ECommerceApp.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ECommerceApp.Endpoint;
@@ -81,5 +82,19 @@ public static class CartEndpoints
 
             return TypedResults.NoContent();
         });
+
+        app.MapGet("Cart/{Id:int}/Items", async Task<Results<NotFound, Ok<List<CartItem>>>>
+                  (ICartServices cartService, int Id) =>
+        {
+            var CartItems = await cartService.GetCartItems(Id);
+            
+            if(CartItems is null)
+            {
+                return TypedResults.NotFound();
+            }
+
+            return TypedResults.Ok(CartItems);
+        });
+        
     }
 }

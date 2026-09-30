@@ -2,6 +2,7 @@ using ECommerceApp.Data;
 using ECommerceApp.Endpoint;
 using ECommerceApp.Middleware;
 using ECommerceApp.Repository;
+using ECommerceApp.Services;
 using Microsoft.AspNetCore.OpenApi;
 using Scalar.AspNetCore;
 
@@ -11,6 +12,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddProblemDetails();
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICartServices, CartServices>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 var app = builder.Build();
@@ -33,8 +35,6 @@ app.MapUserEndpoints();
 app.MapProductEndpoints();
 app.MapCategoryEndpoints();
 app.MapCartEndpoints();
-app.MapCartItemEndpoints();
 app.MapOrderEndpoints();
-app.MapOrderItemEndpoints();
 app.MapPaymentInfoEndpoints();
 app.Run();
