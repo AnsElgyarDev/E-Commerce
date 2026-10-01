@@ -17,6 +17,7 @@ public static class AuthEndpoints
             (UserManager<AppliactionUser> userManager, RegisterDto dto) =>
         {
             var userExists = await userManager.FindByEmailAsync(dto.Email);
+            
             if (userExists != null)
             {
                 return TypedResults.BadRequest(new AuthReponseDto(false, "Email is already registered."));
