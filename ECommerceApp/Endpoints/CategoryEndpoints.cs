@@ -10,18 +10,24 @@ public static class CategoryEndpoints
     public static void MapCategoryEndpoints(this WebApplication app)
     {
         // Get All
-        app.MapGet("/categories", async Task<Results<NotFound, Ok<List<CategoryDto>>>> 
-        (IGenericRepository<Category> repo) =>
+        app.MapGet("/categories", async Task<Ok<PagedList<CategoryDto>>> 
+            (IGenericRepository<Category> repo, int pageNumber = 1, int pageSize = 10) =>
         {
-            var categories = await repo.GetAll();
-            if (categories is null || !categories.Any()) return TypedResults.NotFound();
+            var categories = await repo.GetPagedAsync(pageNumber, pageSize);
 
-            var result = categories.Select(c => new CategoryDto
+            var dtoList = categories.Items.Select(c => new CategoryDto
             {
                 Id = c.Id,
                 Name = c.Name,
                 Description = c.Description
             }).ToList();
+
+            var result = new PagedList<CategoryDto>(
+                dtoList, 
+                categories.TotalCount, 
+                categories.PageIndex, 
+                categories.PageSize
+            );
 
             return TypedResults.Ok(result);
         });
