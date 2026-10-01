@@ -3,6 +3,7 @@ using ECommerceApp.Models;
 using ECommerceApp.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceApp.Endpoint;
 
@@ -14,7 +15,7 @@ public static class AuthEndpoints
 
         // 1. Register
         group.MapPost("/register", async Task<Results<BadRequest<AuthReponseDto>, Ok<AuthReponseDto>>> 
-            (UserManager<AppliactionUser> userManager, RegisterDto dto) =>
+            (UserManager<AppliactionUser> userManager,[FromBody] RegisterDto dto) =>
         {
             var userExists = await userManager.FindByEmailAsync(dto.Email);
             
