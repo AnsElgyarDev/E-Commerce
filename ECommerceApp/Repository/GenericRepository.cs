@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using ECommerceApp.Data;
 using ECommerceApp.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -73,5 +74,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             .ToListAsync();
 
         return new PagedList<T>(items, totalCount, pageNumber, pageSize);
+    }
+
+    public async Task<List<T>> GetFilteredAsync(Expression<Func<T, bool>> predicate)
+    {
+        return await _dbSet.Where(predicate).ToListAsync();
     }
 }
