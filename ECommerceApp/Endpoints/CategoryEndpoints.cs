@@ -18,13 +18,18 @@ public static class CategoryEndpoints
             string cacheKey = $"categories_page_{pageNumber}_size_{pageSize}";
 
             var cachedData = await cache.GetAsync<PagedList<CategoryDto>>(cacheKey);
+            
             if (cachedData is not null)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 System.Console.WriteLine("From Cache");
+                System.Console.ResetColor();
                 return TypedResults.Ok(cachedData); 
             }
 
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             System.Console.WriteLine("From Database");
+            System.Console.ResetColor();
             var categories = await repo.GetPagedAsync(pageNumber, pageSize);
 
             var dtoList = categories.Items.Select(c => new CategoryDto
@@ -53,9 +58,13 @@ public static class CategoryEndpoints
             var cachedCategory = await cache.GetAsync<CategoryDto>(cacheKey);
             if (cachedCategory is not null)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                System.Console.WriteLine("From Cache");
                 return TypedResults.Ok(cachedCategory);
             }
-
+            
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            System.Console.WriteLine("From Database");
             var c = await repo.GetById(id);
             if (c is null) return TypedResults.NotFound();
 
