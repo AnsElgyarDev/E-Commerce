@@ -65,6 +65,14 @@ builder.Services.AddAuthorization(options =>
     
 });
 
+// Implementing Redis Config Service
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis") 
+                            ?? "localhost:6379";
+    options.InstanceName = "ECommerce_";
+});
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
