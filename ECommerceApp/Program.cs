@@ -67,6 +67,21 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        await DbInitializer.SeedRolesAndAdminAsync(services);
+    }
+    
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
+}
+
 app.UseExceptionHandler();
 
 app.UseAuthentication();
@@ -85,6 +100,7 @@ app.MapGet("/", () =>
 }).ExcludeFromDescription();
 
 app.MapProductEndpoints();
+app.MapAdminEnpoints();
 app.MapCategoryEndpoints();
 app.MapCartEndpoints();
 app.MapOrderEndpoints();
