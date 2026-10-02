@@ -17,10 +17,20 @@ public static class CacheExtensions
 
     public static async Task<T?> GetAsync<T>(this IDistributedCache cache, string key)
     {
-        var jsonData = await cache.GetStringAsync(key);
-        if (string.IsNullOrEmpty(jsonData))
+        try
+        {
+            var jsonData = await cache.GetStringAsync(key);
+            if (string.IsNullOrEmpty(jsonData))
+                return default;               
+    
+            return JsonSerializer.Deserialize<T>(jsonData);
+        }
+        
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Redis Warning] Server unreachable: {ex.Message}");
             return default;
+        }
 
-        return JsonSerializer.Deserialize<T>(jsonData);
     }
 }

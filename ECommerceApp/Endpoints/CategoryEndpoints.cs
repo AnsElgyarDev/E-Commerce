@@ -20,9 +20,11 @@ public static class CategoryEndpoints
             var cachedData = await cache.GetAsync<PagedList<CategoryDto>>(cacheKey);
             if (cachedData is not null)
             {
+                System.Console.WriteLine("From Cache");
                 return TypedResults.Ok(cachedData); 
             }
 
+            System.Console.WriteLine("From Database");
             var categories = await repo.GetPagedAsync(pageNumber, pageSize);
 
             var dtoList = categories.Items.Select(c => new CategoryDto
