@@ -15,7 +15,7 @@ public static class AuthEndpoints
 
         // 1. Register
         group.MapPost("/register", async Task<Results<BadRequest<AuthReponseDto>, Ok<AuthReponseDto>>> 
-            (UserManager<AppliactionUser> userManager,[FromBody] RegisterDto dto) =>
+            (UserManager<AppliactionUser> userManager, RegisterDto dto) =>
         {
             var userExists = await userManager.FindByEmailAsync(dto.Email);
             

@@ -23,6 +23,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICartServices, CartServices>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
 builder.Services.AddIdentity<AppliactionUser, IdentityRole<int>>(options =>
 {
     options.Password.RequireDigit = true;
@@ -50,7 +51,19 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Adminonly", policy => 
+        policy.RequireRole("Admin"));
+
+    options.AddPolicy("Manager", policy => 
+        policy.RequireRole("Manager"));
+
+    options.AddPolicy("CanDeleteProduct", policy => 
+        policy.RequireClaim("Permission", "CanDelete"));
+
+    
+});
 
 var app = builder.Build();
 
@@ -71,7 +84,6 @@ app.MapGet("/", () =>
     return TypedResults.Redirect("/Scalar/V1");
 }).ExcludeFromDescription();
 
-app.MapUserEndpoints();
 app.MapProductEndpoints();
 app.MapCategoryEndpoints();
 app.MapCartEndpoints();

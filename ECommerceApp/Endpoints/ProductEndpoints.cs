@@ -1,6 +1,7 @@
 using ECommerceApp.Dto;
 using ECommerceApp.Models;
 using ECommerceApp.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ECommerceApp.Endpoint;
@@ -26,7 +27,7 @@ public static class ProductEndpoints
             }).ToList();
 
             return TypedResults.Ok(result);
-        });
+        }).RequireAuthorization();
 
         // Get By Id
         app.MapGet("/products/{id:int}", async Task<Results<NotFound, Ok<ProductDto>>> 
