@@ -6,6 +6,7 @@ namespace ECommerceApp.Services;
 
 public interface IProdcutServices
 {
+    public  Task<Product> GetProductById(int Id);
 }
 /*
     List of anything in pages 
